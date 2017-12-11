@@ -1,0 +1,86 @@
+import random
+balance = 50000.0
+
+def newAccount ():
+    ##This function is to collect details of the new bank customer
+    newCust = input("Kindly insert your fullname: ")
+    mobileNo = int(input("whats your mobile no? "))
+    age = int(input("How old are you? "))
+    email = input("whats your email address: ")
+    accNo = random.randint (1000,9999)
+    print ("Hello,", newCust, "Your Account Number is" , accNo)
+    return
+newAccount()
+
+def deposit ():
+    global balance
+    amount = input("How much will you like to Deposit? ")
+    while not amount.isdigit():
+        print ("Kindly use ONLY digits")
+        amount = input("How much will you like to Deposit? ")
+    
+    balance += float(amount)
+    print ("Your ACCOUNT Balance is", balance, "USD")
+    print ("Thank you for Banking with us")
+    ask = ("Will you like to Perform another Deposit? Y/N")
+    if ask.upper() == "Y":
+        deposit ()
+    else:
+        return balance
+    
+
+
+def withdraw():
+    amount = input("How much will you like to withdraw? ")
+    while not amount.isdigit():
+        print ("Kindly use ONLY digits")
+        amount = input("How much will you like to withdraw? ")
+    
+    global balance
+    if balance > float(amount):
+        balance -= float(amount)
+        print ("Your ACCOUNT Balance is", balance, "USD")
+        print ("Thank you for Banking with us")
+        return balance
+    elif balance < float(amount):
+        print ("Insufficient Balance")
+        ask = ("Will you like to fund your Account Y/N")
+        if ask.upper()== "Y":
+            deposit()
+            return
+            
+            
+            
+
+def transaction():
+    print("WELCOME TO GUARANTY TRUST BANK")
+    #deposit = deposit()
+    #withrdaw = withdraw ()
+    
+    print ("Welcome, Kindly select desire Transaction")
+    print ("To DEPOSIT press 1...for WITHDRAWS press 2")
+    ask = input("Will you like to DEPOSIT or WITHRDAW? ")
+    if ask.upper() == "1":
+        deposit()
+
+    elif ask.upper() == "2":
+        withdraw ()
+        
+    else:
+        ask = input("Will you like to perform another Transaction ? Y/N")
+        if ask.upper() == "Y":
+            transaction()
+        else:
+            print("Thank you for Banking with us")
+    return
+transaction()
+
+
+def finalRequest ():
+    ask = input("Will you like to perform another Transaction ? Y/N")
+    if ask.upper() == "Y":
+        transaction()
+    else:
+            print("Thank you for Banking with us")
+finalRequest()
+
